@@ -17,6 +17,10 @@
         .subject-science { background-color: #faf5ff; border-left: 5px solid #7c3aed; color: #4c1d95; }
         .subject-chinese { background-color: #fff7ed; border-left: 5px solid #f97316; color: #7c2d12; }
         .subject-social { background-color: #f0f9ff; border-left: 5px solid #0ea5e9; color: #0c4a6e; }
+        .subject-flex { background-color: #f8fafc; border-left: 5px solid #64748b; color: #334155; }
+        /* 總班主任專用色 */
+        .subject-principal { background-color: #fef3c7; border-left: 5px solid #d97706; color: #92400e; }
+        
         .empty-slot { color: #e2e8f0; font-size: 0.85rem; }
         
         .tab-active {
@@ -205,7 +209,7 @@
                     <p class="text-slate-400 text-sm mt-2 font-medium">填寫下方資料，我們將由專人與您聯繫</p>
                 </div>
                 
-                <form id="leadForm" action="https://formspree.io/f/mpqkjlkv" method="POST" class="space-y-5">
+                <form id="leadForm" action="https://formspree.io/f/xdayyrny" method="POST" class="space-y-5">
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-500 mb-1.5"><span class="text-red-500">*</span> 學生姓名</label>
@@ -224,18 +228,28 @@
 
                     <button type="submit" id="submitBtn" class="w-full bg-[#06C755] hover:bg-[#05a346] text-white font-black py-5 rounded-[2rem] shadow-lg transition-all transform active:scale-95 flex items-center justify-center space-x-3 text-lg">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738s-12 4.369-12 9.738c0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.027c-.052.303-.242 1.186 1.046.647 1.287-.54 6.942-4.085 9.467-6.991 1.761-1.954 2.526-3.834 2.526-5.973z"/></svg>
-                        <span id="btnText">提交預約諮詢</span>
+                        <span id="btnText">提交並開啟 LINE 諮詢</span>
                     </button>
+                    <p class="text-[10px] text-center text-slate-400 italic">※ 提交後會自動複製資料，方便您在 LINE 直接貼上諮詢</p>
                 </form>
             </div>
         </div>
 
         <!-- 4. Schedule Section -->
         <div class="mb-12">
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <span class="w-2 h-8 bg-red-700 rounded-full"></span>
-                課程時段表
-            </h2>
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                        <span class="w-2 h-8 bg-red-700 rounded-full"></span>
+                        課程時段表
+                    </h2>
+                    <p class="text-red-600 font-bold text-sm mt-1 ml-5">📅 2026.07.01 起適用</p>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 px-4 py-2 rounded-xl text-amber-800 text-xs font-bold shadow-sm">
+                    ✨ 團班 滿五人即開班
+                </div>
+            </div>
+
             <div class="no-print flex flex-wrap gap-2 bg-slate-200/50 p-1.5 rounded-2xl mb-6 w-fit border border-slate-200">
                 <button onclick="switchGrade(7)" id="tab-7" class="tab-active px-6 py-3 rounded-xl transition shadow-sm">國一課程</button>
                 <button onclick="switchGrade(8)" id="tab-8" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國二課程</button>
@@ -288,8 +302,8 @@
     </div>
 
     <!-- Toast -->
-    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-black/90 text-white px-8 py-3 rounded-full text-sm font-bold opacity-0 transition-opacity pointer-events-none z-50 shadow-2xl">
-        資料已成功傳送！
+    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-black/90 text-white px-8 py-3 rounded-full text-xs md:text-sm font-bold opacity-0 transition-opacity pointer-events-none z-50 shadow-2xl text-center min-w-[300px]">
+        資料已成功複製，即將跳轉至 LINE！<br><span class="text-red-400 text-[10px]">請直接在 LINE 對話視窗貼上並傳送。</span>
     </div>
 
     <script>
@@ -298,38 +312,49 @@
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
                     { time: "18:30 - 21:00", items: [
-                        {sub: "國一英文", type: "english"}, 
                         null, 
+                        {sub: "國一英文", type: "english"}, 
                         {sub: "國一數學", type: "math"}, 
                         null, null, null, null
+                    ]},
+                    { time: "18:00 - 21:00", items: [
+                        null, null, null, null, null,
+                        {sub: "總班主任個別指導 (全科)", type: "principal"}, 
+                        null
                     ]}
                 ]
             },
             8: {
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
-                    { time: "17:30 - 19:30", items: [
-                        null, null, null, null, 
-                        {sub: "國二數學", type: "math"}, 
+                    { time: "18:30 - 21:00", items: [
+                        {sub: "國二數學 (個別指導)", type: "math"}, 
+                        null, null, null,
+                        {sub: "國二英文 (個別指導)", type: "english"}, 
                         null, null
                     ]},
-                    { time: "18:30 - 20:30", items: [
-                        {sub: "國二英文", type: "english"}, 
-                        null, null, null, null, null, null
+                    { time: "18:00 - 21:00", items: [
+                        null, null, null, null, null,
+                        {sub: "總班主任個別指導 (全科)", type: "principal"}, 
+                        null
                     ]}
                 ]
             },
             9: {
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
+                    { time: "09:00 - 12:00", items: [
+                        null, null, null, null, null, null,
+                        {sub: "國三自然", type: "science"}
+                    ]},
                     { time: "18:00 - 21:00", items: [
                         {sub: "國三英文", type: "english"}, 
                         null, 
                         {sub: "國三國文", type: "chinese"}, 
                         {sub: "國三數學", type: "math"}, 
                         {sub: "國三社會", type: "social"}, 
-                        null, 
-                        {sub: "國三自然", type: "science"}
+                        {sub: "總班主任個別指導 (全科)", type: "principal"}, 
+                        null
                     ]}
                 ]
             }
@@ -354,7 +379,7 @@
                         <thead>
                             <tr class="bg-slate-900 text-white">
                                 <th class="p-5 font-bold text-sm w-32 border-r border-slate-700">授課時段</th>
-                                ${data.days.map(day => `<th class="p-5 font-bold text-sm ${day === '週日' ? 'text-red-400' : ''}">${day}</th>`).join('')}
+                                ${data.days.map(day => `<th class="p-5 font-bold text-sm ${day === '週日' ? 'text-red-400' : ''} ${day === '週六' ? 'text-amber-400' : ''}">${day}</th>`).join('')}
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
@@ -392,10 +417,24 @@
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            submitBtn.disabled = true;
-            btnText.innerText = "資料傳送中...";
             
+            const sName = document.getElementById('studentName').value;
+            const pName = document.getElementById('parentName').value;
+            const phone = document.getElementById('phone').value;
+
+            submitBtn.disabled = true;
+            btnText.innerText = "正在複製資料並跳轉...";
+            
+            const textToCopy = `【金名德晉預約報名諮詢】\n學生姓名：${sName}\n家長姓名：${pName}\n行動電話：${phone}\n---\n我已完成網頁表單提交，想了解課程詳情！`;
+
             try {
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = textToCopy;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempTextArea);
+
                 await fetch(form.action, {
                     method: form.method,
                     body: new FormData(form),
@@ -403,12 +442,13 @@
                 });
 
                 toast.style.opacity = '1';
-                setTimeout(() => { toast.style.opacity = '0'; }, 3000);
-                setTimeout(() => { window.location.href = "https://line.me/ti/p/vQcf6cONnl"; }, 1500);
+                
+                setTimeout(() => {
+                    window.location.href = "https://line.me/ti/p/vQcf6cONnl";
+                }, 1500);
 
             } catch (err) {
-                btnText.innerText = "提交失敗，請重試";
-                submitBtn.disabled = false;
+                window.location.href = "https://line.me/ti/p/vQcf6cONnl";
             }
         });
 
