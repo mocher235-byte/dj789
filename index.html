@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金名德晉補習班 - 專業國中課程與預約報名</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #fffafb;
+        }
+        /* 學科配色 */
+        .subject-math { background-color: #eff6ff; border-left: 5px solid #2563eb; color: #1e3a8a; }
+        .subject-english { background-color: #f0fdf4; border-left: 5px solid #16a34a; color: #14532d; }
+        .subject-science { background-color: #faf5ff; border-left: 5px solid #7c3aed; color: #4c1d95; }
+        .subject-chinese { background-color: #fff7ed; border-left: 5px solid #f97316; color: #7c2d12; }
+        .subject-social { background-color: #f0f9ff; border-left: 5px solid #0ea5e9; color: #0c4a6e; }
+        .empty-slot { color: #e2e8f0; font-size: 0.85rem; }
+        
+        .tab-active {
+            background-color: #ffffff;
+            color: #b91c1c;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            font-weight: 700;
+        }
+
+        /* 榮譽榜跑馬燈動畫 */
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-scroll {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll 35s linear infinite;
+        }
+        
+        /* 3D 浮動按鈕動畫 */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .float-3d {
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2), inset 0 -4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .float-3d:hover {
+            transform: scale(1.1) translateY(-15px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.3), inset 0 -2px 4px rgba(0,0,0,0.1);
+        }
+
+        .step-badge {
+            display: inline-block;
+            background-color: #ef4444;
+            color: white;
+            padding: 2px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-focus:focus {
+            outline: none;
+            border-color: #ef4444;
+            ring: 2px;
+            ring-color: #fee2e2;
+        }
+
+        .bright-sharp {
+            filter: brightness(1.08) contrast(1.05) saturate(1.1);
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; }
+            .max-w-6xl { max-width: 100%; }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- LINE 3D 浮標 -->
+    <a href="https://line.me/ti/p/vQcf6cONnl" target="_blank" class="no-print fixed bottom-8 right-8 z-50 flex items-center justify-center w-16 h-16 bg-[#06C755] rounded-full float-3d border-2 border-white">
+        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.185 1.039.646 1.281-.54 6.911-4.069 9.428-6.967 1.939-2.13 2.571-3.953 2.571-5.991z"/>
+        </svg>
+    </a>
+
+    <!-- Honor Roll Marquee -->
+    <div class="no-print w-full bg-red-700 text-white py-2.5 mb-8 overflow-hidden relative shadow-inner">
+        <div class="animate-scroll font-bold text-sm uppercase tracking-wider">
+            🏆 狂賀！Peggy 榮獲國中教育會考【全國榜首】錄取北一女！ 🔥 賀 曙光 昱皓 數學100！ 🌟 義民茗哲 數學滿分100！ 🌟 竹北國中宜芳 段考滿分！ ✨ 金名德晉 專業引領 · 卓越成績！
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
+            <div class="flex items-center gap-4 md:gap-6">
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-md border border-amber-200">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjRqKCNWrsH37nthSraJgRc4iUslqv0Pw0urBa9ZwTuV3CLiliGNWjV3EddlJwJ7ox07Uol5GQL77Msjqw-_MUrwQIS6E7iHsdc-RaogP2TVjkJmZ1IkGSrX4ZCLfiZmapAPl5PyxovhZwtsxh080ROmCTJWQcbdtBMAAYIlO-BIsofB7tRYNn0ZZTHEgM" 
+                         alt="Logo" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-black text-slate-800 tracking-tight">金名德晉文理補習班</h1>
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-red-700 font-bold text-xs no-print uppercase tracking-widest">
+                        <span>專業導師 · 精確教材</span>
+                        <span class="text-slate-300">|</span>
+                        <a href="tel:036572508" class="hover:underline">📞 03-6572508</a>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="window.print()" class="no-print bg-slate-900 text-white px-6 py-2.5 rounded-lg hover:bg-red-700 transition shadow-md text-sm font-bold">
+                列印官方課表
+            </button>
+        </div>
+
+        <!-- 1. FB Section -->
+        <div class="no-print mb-8">
+            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="text-center md:text-left">
+                    <div class="step-badge">STEP 1</div>
+                    <h3 class="text-2xl font-black text-slate-800 mb-2">FB 按讚追蹤</h3>
+                    <p class="text-slate-500 text-sm">追蹤金名德晉粉絲團，掌握最新教育資訊與活動好康！</p>
+                </div>
+                <a href="https://www.facebook.com/jingmingliveabc/" target="_blank" class="w-full md:w-auto bg-[#1877F2] px-10 py-5 rounded-2xl flex items-center justify-center space-x-4 shadow-lg hover:bg-[#166fe5] active:scale-95 transition-all group min-w-[280px]">
+                    <svg class="w-8 h-8 text-white group-hover:scale-110 transition" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    <span class="text-white font-black text-xl tracking-wide">前往 FB 按讚</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 2. Lead Form Section -->
+        <div class="mb-12 no-print bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-100">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-8">
+                    <div class="step-badge">STEP 2</div>
+                    <h3 class="text-3xl font-black text-slate-800">了解詳情</h3>
+                    <p class="text-slate-400 text-sm mt-2 font-medium">填寫下方資料，我們將由專人與您聯繫</p>
+                </div>
+                
+                <form id="leadForm" action="https://formspree.io/f/mpqkjlkv" method="POST" class="space-y-5">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1.5"><span class="text-red-500">*</span> 學生姓名</label>
+                            <input type="text" id="studentName" name="學生姓名" required class="w-full p-4 rounded-2xl border border-slate-200 text-sm input-focus bg-slate-50" placeholder="孩子姓名">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1.5"><span class="text-red-500">*</span> 家長姓名</label>
+                            <input type="text" id="parentName" name="家長姓名" required class="w-full p-4 rounded-2xl border border-slate-200 text-sm input-focus bg-slate-50" placeholder="您的稱呼">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1.5"><span class="text-red-500">*</span> 行動電話</label>
+                        <input type="tel" id="phone" name="行動電話" required class="w-full p-4 rounded-2xl border border-slate-200 text-sm input-focus bg-slate-50" placeholder="09XX-XXX-XXX">
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full bg-[#06C755] hover:bg-[#05a346] text-white font-black py-5 rounded-[2rem] shadow-lg transition-all transform active:scale-95 flex items-center justify-center space-x-3 text-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738s-12 4.369-12 9.738c0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.027c-.052.303-.242 1.186 1.046.647 1.287-.54 6.942-4.085 9.467-6.991 1.761-1.954 2.526-3.834 2.526-5.973z"/></svg>
+                        <span id="btnText">提交預約諮詢</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 3. Schedule Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span class="w-2 h-8 bg-red-700 rounded-full"></span>
+                課程時段表
+            </h2>
+            <div class="no-print flex flex-wrap gap-2 bg-slate-200/50 p-1.5 rounded-2xl mb-6 w-fit border border-slate-200">
+                <button onclick="switchGrade(7)" id="tab-7" class="tab-active px-6 py-3 rounded-xl transition shadow-sm">國一課程</button>
+                <button onclick="switchGrade(8)" id="tab-8" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國二課程</button>
+                <button onclick="switchGrade(9)" id="tab-9" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國三課程</button>
+            </div>
+
+            <div id="schedule-container" class="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-200">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+
+        <!-- 4. Location & Contact -->
+        <div class="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden mb-12">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-red-600/10 rounded-full -mr-32 -mt-32"></div>
+            <div class="relative z-10 grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <h2 class="text-3xl font-black mb-6 border-l-4 border-red-500 pl-4">聯絡資訊</h2>
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <span class="text-2xl mt-1">📍</span>
+                            <div>
+                                <p class="text-slate-400 text-sm font-bold uppercase mb-1">班址</p>
+                                <p class="text-xl font-bold">新竹縣竹北市文孝街23號(補教協會二樓)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="text-2xl mt-1">📞</span>
+                            <div>
+                                <p class="text-slate-400 text-sm font-bold uppercase mb-1">諮詢專線</p>
+                                <a href="tel:036572508" class="text-3xl font-black text-red-400 hover:text-red-300 transition">03-6572508</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <a href="https://share.google/SrNnXGXtOnSCZ377t" target="_blank" class="bg-white text-slate-900 p-6 rounded-2xl font-black text-xl flex items-center justify-center gap-3 hover:bg-amber-400 transition shadow-lg group">
+                        <span class="text-2xl group-hover:scale-125 transition">🗺️</span>
+                        開啟 Google 導航
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-10 text-center no-print pb-10">
+            <div class="text-slate-400 text-xs tracking-widest uppercase mb-2 italic">
+                專業引導 · 卓越學習 · 金名德晉文理補習班
+            </div>
+            <p class="text-[10px] text-slate-300 italic">府教社字第1000079733號</p>
+        </footer>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-black/90 text-white px-8 py-3 rounded-full text-sm font-bold opacity-0 transition-opacity pointer-events-none z-50 shadow-2xl">
+        資料已成功傳送！
+    </div>
+
+    <script>
+        const scheduleData = {
+            7: {
+                days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
+                slots: [
+                    { time: "18:30 - 21:00", items: [
+                        {sub: "國一英文", type: "english"}, 
+                        null, 
+                        {sub: "國一數學", type: "math"}, 
+                        null, null, null, null
+                    ]}
+                ]
+            },
+            8: {
+                days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
+                slots: [
+                    { time: "17:30 - 19:30", items: [
+                        null, null, null, null, 
+                        {sub: "國二數學", type: "math"}, 
+                        null, null
+                    ]},
+                    { time: "18:30 - 20:30", items: [
+                        {sub: "國二英文", type: "english"}, 
+                        null, null, null, null, null, null
+                    ]}
+                ]
+            },
+            9: {
+                days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
+                slots: [
+                    { time: "18:00 - 21:00", items: [
+                        {sub: "國三英文", type: "english"}, 
+                        null, 
+                        {sub: "國三國文", type: "chinese"}, 
+                        {sub: "國三數學", type: "math"}, 
+                        {sub: "國三社會", type: "social"}, 
+                        null, 
+                        {sub: "國三自然", type: "science"}
+                    ]}
+                ]
+            }
+        };
+
+        function switchGrade(grade) {
+            document.querySelectorAll('[id^="tab-"]').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('text-slate-500');
+            });
+            document.getElementById(`tab-${grade}`).classList.add('tab-active');
+            renderSchedule(grade);
+        }
+
+        function renderSchedule(grade) {
+            const data = scheduleData[grade];
+            const container = document.getElementById('schedule-container');
+            
+            let html = `
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center border-collapse min-w-[800px]">
+                        <thead>
+                            <tr class="bg-slate-900 text-white">
+                                <th class="p-5 font-bold text-sm w-32 border-r border-slate-700">授課時段</th>
+                                ${data.days.map(day => `<th class="p-5 font-bold text-sm ${day === '週日' ? 'text-red-400' : ''}">${day}</th>`).join('')}
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+            `;
+
+            data.slots.forEach((slot) => {
+                html += `
+                    <tr>
+                        <td class="p-5 bg-slate-50 border-r border-slate-100 font-bold text-slate-600 text-sm">
+                            ${slot.time}
+                        </td>
+                        ${slot.items.map(item => {
+                            if (!item) return `<td class="p-4 empty-slot">備課 / 輔導</td>`;
+                            return `
+                                <td class="p-3">
+                                    <div class="subject-${item.type} py-4 px-2 rounded-xl font-bold text-base shadow-sm transform transition hover:scale-105 cursor-default">
+                                        ${item.sub}
+                                    </div>
+                                </td>
+                            `;
+                        }).join('')}
+                    </tr>
+                `;
+            });
+
+            html += `</tbody></table></div>`;
+            container.innerHTML = html;
+        }
+
+        // 表單處理
+        const form = document.getElementById('leadForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const toast = document.getElementById('toast');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            btnText.innerText = "資料傳送中...";
+            
+            try {
+                await fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                toast.style.opacity = '1';
+                setTimeout(() => { toast.style.opacity = '0'; }, 3000);
+                setTimeout(() => { window.location.href = "https://line.me/ti/p/vQcf6cONnl"; }, 1500);
+
+            } catch (err) {
+                btnText.innerText = "提交失敗，請重試";
+                submitBtn.disabled = false;
+            }
+        });
+
+        window.onload = () => renderSchedule(7);
+    </script>
+</body>
+</html>
