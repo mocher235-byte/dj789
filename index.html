@@ -20,6 +20,8 @@
         .subject-flex { background-color: #f8fafc; border-left: 5px solid #64748b; color: #334155; }
         /* 總班主任專用色 */
         .subject-principal { background-color: #fef3c7; border-left: 5px solid #d97706; color: #92400e; }
+        /* 先修課程配色 */
+        .subject-prep { background-color: #fff1f2; border-left: 5px solid #e11d48; color: #881337; }
         
         .empty-slot { color: #e2e8f0; font-size: 0.85rem; }
         
@@ -157,7 +159,6 @@
                         <h3 class="text-3xl font-black text-slate-800 mb-4 leading-tight">
                             【美少女 Peggy 的奇蹟之路】
                         </h3>
-                        <!-- 逆襲時間軸 -->
                         <div class="flex flex-wrap items-center gap-2 text-sm font-black mb-6">
                             <span class="px-3 py-1 bg-slate-200 text-slate-600 rounded-lg line-through">不及格</span>
                             <span class="text-red-400">➔</span>
@@ -230,7 +231,7 @@
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738s-12 4.369-12 9.738c0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.027c-.052.303-.242 1.186 1.046.647 1.287-.54 6.942-4.085 9.467-6.991 1.761-1.954 2.526-3.834 2.526-5.973z"/></svg>
                         <span id="btnText">提交並開啟 LINE 諮詢</span>
                     </button>
-                    <p class="text-[10px] text-center text-slate-400 italic">※ 提交後會自動複製資料，方便您在 LINE 直接貼上諮詢</p>
+                    <p class="text-[10px] text-center text-slate-400 italic">※ 提交後會自動複製資料，方便您在 LINE 直接貼上諮詢先修或正式課程</p>
                 </form>
             </div>
         </div>
@@ -243,7 +244,7 @@
                         <span class="w-2 h-8 bg-red-700 rounded-full"></span>
                         課程時段表
                     </h2>
-                    <p class="text-red-600 font-bold text-sm mt-1 ml-5">📅 2026.07.01 起適用</p>
+                    <p class="text-red-600 font-bold text-sm mt-1 ml-5">📅 最新先修 (分畢業前後) & 正式課程 7/1 以後</p>
                 </div>
                 <div class="bg-amber-50 border border-amber-200 px-4 py-2 rounded-xl text-amber-800 text-xs font-bold shadow-sm">
                     ✨ 團班 滿五人即開班
@@ -251,7 +252,8 @@
             </div>
 
             <div class="no-print flex flex-wrap gap-2 bg-slate-200/50 p-1.5 rounded-2xl mb-6 w-fit border border-slate-200">
-                <button onclick="switchGrade(7)" id="tab-7" class="tab-active px-6 py-3 rounded-xl transition shadow-sm">國一課程</button>
+                <button onclick="switchGrade('prep')" id="tab-prep" class="tab-active px-6 py-3 rounded-xl transition shadow-sm">國一先修班</button>
+                <button onclick="switchGrade(7)" id="tab-7" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國一課程 <span class="text-[10px] opacity-70">(7/1起)</span></button>
                 <button onclick="switchGrade(8)" id="tab-8" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國二課程</button>
                 <button onclick="switchGrade(9)" id="tab-9" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國三課程</button>
             </div>
@@ -308,6 +310,29 @@
 
     <script>
         const scheduleData = {
+            'prep': {
+                days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
+                slots: [
+                    { time: "14:00 - 15:30", items: [
+                        {sub: "國一先修數學<br><span class='text-xs'>(6/11畢業後)</span>", type: "prep"}, 
+                        {sub: "國一先修英文<br><span class='text-xs'>(6/11畢業後)</span>", type: "prep"}, 
+                        null, 
+                        {sub: "國一先修數學<br><span class='text-xs'>(6/11畢業後)</span>", type: "prep"}, 
+                        null, null, null
+                    ]},
+                    { time: "16:20 - 18:20", items: [
+                        {sub: "兒美 C 班<br><span class='text-xs'>(6/11畢業後)</span>", type: "english"}, 
+                        null, null, 
+                        {sub: "兒美 C 班<br><span class='text-xs'>(6/11畢業後)</span>", type: "english"}, 
+                        null, null, null
+                    ]},
+                    { time: "18:30 - 20:00", items: [
+                        null, null, 
+                        {sub: "國一先修數學<br><span class='text-xs'>(5/13~6/3畢業前)</span>", type: "prep"}, 
+                        null, null, null, null
+                    ]}
+                ]
+            },
             7: {
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
@@ -425,7 +450,7 @@
             submitBtn.disabled = true;
             btnText.innerText = "正在複製資料並跳轉...";
             
-            const textToCopy = `【金名德晉預約報名諮詢】\n學生姓名：${sName}\n家長姓名：${pName}\n行動電話：${phone}\n---\n我已完成網頁表單提交，想了解課程詳情！`;
+            const textToCopy = `【金名德晉預約報名諮詢】\n學生姓名：${sName}\n家長姓名：${pName}\n行動電話：${phone}\n---\n我已完成網頁表單提交，想了解國一先修或 7/1 正式課程詳情！`;
 
             try {
                 const tempTextArea = document.createElement('textarea');
@@ -452,7 +477,7 @@
             }
         });
 
-        window.onload = () => renderSchedule(7);
+        window.onload = () => renderSchedule('prep');
     </script>
 </body>
 </html>
