@@ -103,7 +103,7 @@
     <!-- Honor Roll Marquee -->
     <div class="no-print w-full bg-red-700 text-white py-2.5 mb-8 overflow-hidden relative shadow-inner">
         <div class="animate-scroll font-bold text-sm uppercase tracking-wider">
-            🏆 狂賀！Peggy 榮獲國中教育會考【全國榜首】錄取北一女！ 🔥 賀 曙光 昱皓 數學100！ 🌟 義民茗哲 數學滿分100！ 🌟 竹北國中宜芳 段考滿分！ ✨ 金名德晉 專業引領 · 卓越成績！
+            🏆 狂賀！Peggy 榮獲國中教育會考【全國榜首】錄取北一女！ 🔥 賀 曙光 昱皓 數學100！ 🌟 義民茗哲 數學滿分100！  ✨ 金名德晉 專業引領 · 卓越成績！
         </div>
     </div>
 
@@ -130,7 +130,34 @@
             </button>
         </div>
 
-        <!-- 1. FB Section -->
+        <!-- 1. Schedule Section (Moved to top) -->
+        <div class="mb-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                        <span class="w-2 h-8 bg-red-700 rounded-full"></span>
+                        課程時段表
+                    </h2>
+                    <p class="text-red-600 font-bold text-sm mt-1 ml-5">📅 最新先修 (分畢業前後) & 正式課程 7/1 以後</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl text-slate-500 text-[11px] font-bold shadow-sm">
+                    💡 備註：三間分校統一於每年的 7/1 更換課表時間並升年級
+                </div>
+            </div>
+
+            <div class="no-print flex flex-wrap gap-2 bg-slate-200/50 p-1.5 rounded-2xl mb-6 w-fit border border-slate-200">
+                <button onclick="switchGrade('prep')" id="tab-prep" class="tab-active px-6 py-3 rounded-xl transition shadow-sm">國一先修班</button>
+                <button onclick="switchGrade(7)" id="tab-7" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國一課程 <span class="text-[10px] opacity-70">(7/1起)</span></button>
+                <button onclick="switchGrade(8)" id="tab-8" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國二課程</button>
+                <button onclick="switchGrade(9)" id="tab-9" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國三課程</button>
+            </div>
+
+            <div id="schedule-container" class="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-200">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+
+        <!-- 2. FB Section -->
         <div class="no-print mb-8">
             <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
                 <div class="text-center md:text-left">
@@ -145,7 +172,7 @@
             </div>
         </div>
 
-        <!-- 2. Peggy Testimonial Section -->
+        <!-- 3. Peggy Testimonial Section -->
         <div class="mb-12 no-print bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-red-50">
             <div class="grid md:grid-cols-12 items-stretch">
                 <!-- Image Side -->
@@ -201,7 +228,7 @@
             </div>
         </div>
 
-        <!-- 3. Lead Form Section -->
+        <!-- 4. Lead Form Section -->
         <div class="mb-12 no-print bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-100">
             <div class="max-w-2xl mx-auto">
                 <div class="text-center mb-8">
@@ -233,33 +260,6 @@
                     </button>
                     <p class="text-[10px] text-center text-slate-400 italic">※ 提交後會自動複製資料，方便您在 LINE 直接貼上諮詢先修或正式課程</p>
                 </form>
-            </div>
-        </div>
-
-        <!-- 4. Schedule Section -->
-        <div class="mb-12">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
-                <div>
-                    <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
-                        <span class="w-2 h-8 bg-red-700 rounded-full"></span>
-                        課程時段表
-                    </h2>
-                    <p class="text-red-600 font-bold text-sm mt-1 ml-5">📅 最新先修 (分畢業前後) & 正式課程 7/1 以後</p>
-                </div>
-                <div class="bg-amber-50 border border-amber-200 px-4 py-2 rounded-xl text-amber-800 text-xs font-bold shadow-sm">
-                    ✨ 團班 滿五人即開班
-                </div>
-            </div>
-
-            <div class="no-print flex flex-wrap gap-2 bg-slate-200/50 p-1.5 rounded-2xl mb-6 w-fit border border-slate-200">
-                <button onclick="switchGrade('prep')" id="tab-prep" class="tab-active px-6 py-3 rounded-xl transition shadow-sm">國一先修班</button>
-                <button onclick="switchGrade(7)" id="tab-7" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國一課程 <span class="text-[10px] opacity-70">(7/1起)</span></button>
-                <button onclick="switchGrade(8)" id="tab-8" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國二課程</button>
-                <button onclick="switchGrade(9)" id="tab-9" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國三課程</button>
-            </div>
-
-            <div id="schedule-container" class="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-200">
-                <!-- Rendered by JS -->
             </div>
         </div>
 
@@ -314,11 +314,12 @@
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
                     { time: "14:00 - 15:30", items: [
-                        {sub: "國一先修數學<br><span class='text-xs'>(6/11畢業後)</span>", type: "prep"}, 
+                        null, // 週一原本有課，現已移除
                         {sub: "國一先修英文<br><span class='text-xs'>(6/11畢業後)</span>", type: "prep"}, 
                         null, 
-                        {sub: "國一先修數學<br><span class='text-xs'>(6/11畢業後)</span>", type: "prep"}, 
-                        null, null, null
+                        null, // 週四原本有課，現已移除
+                        {sub: "國一先修數學<br><span class='text-xs'>6/11 畢業後</span>", type: "prep"}, // 週五新增
+                        null, null
                     ]},
                     { time: "16:20 - 18:20", items: [
                         {sub: "兒美 C 班<br><span class='text-xs'>(畢業前後)</span>", type: "english"}, 
