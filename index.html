@@ -343,9 +343,9 @@
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
                     { time: "18:30 - 21:00", items: [
-                        null, 
-                        {sub: "國一英文", type: "english"}, 
-                        {sub: "國一數學", type: "math"}, 
+                        {sub: "國一數學", type: "math"}, // 原週三改為週一
+                        {sub: "國一英文", type: "english"}, // 維持週二不變
+                        null, // 原週三數學移出
                         null, null, null, null
                     ]},
                     { time: "18:00 - 21:00", items: [
@@ -359,9 +359,9 @@
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
                     { time: "18:30 - 21:00", items: [
-                        {sub: "國二數學 (個別指導)", type: "math"}, 
+                        {sub: "國二英文 (個別指導)", type: "english"}, // 英文移至週一
                         null, null, null,
-                        {sub: "國二英文 (個別指導)", type: "english"}, 
+                        {sub: "國二數學 (個別指導)", type: "math"}, // 數學維持週五不變
                         null, null
                     ]},
                     { time: "18:00 - 21:00", items: [
@@ -374,16 +374,16 @@
             9: {
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
-                    { time: "13:30 - 16:30", items: [
+                    { time: "09:00 - 12:00", items: [
                         null, null, null, null, null, null,
                         {sub: "國三自然", type: "science"}
                     ]},
                     { time: "18:00 - 21:00", items: [
                         {sub: "國三英文", type: "english"}, 
                         null, 
-                        {sub: "國三國文", type: "chinese"}, 
+                        {sub: "國三社會", type: "social"}, // 週五改為週三
                         {sub: "國三數學", type: "math"}, 
-                        {sub: "國三社會", type: "social"}, 
+                        {sub: "國三國文", type: "chinese"}, // 週三改為週五
                         {sub: "總班主任個別指導 (全科)", type: "principal"}, 
                         null
                     ]}
