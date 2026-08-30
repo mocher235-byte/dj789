@@ -21,10 +21,8 @@
         .subject-flex { background-color: #f8fafc; border-left: 5px solid #64748b; color: #334155; }
         /* 總班主任專用色 */
         .subject-principal { background-color: #fef3c7; border-left: 5px solid #d97706; color: #92400e; }
-        /* 先修課程配色 */
-        .subject-prep { background-color: #fff1f2; border-left: 5px solid #e11d48; color: #881337; }
         
-        .empty-slot { color: #e2e8f0; font-size: 0.85rem; }
+        .empty-slot { color: #94a3b8; font-size: 0.875rem; font-weight: 500; line-height: 1.4; }
         
         .tab-active {
             background-color: #ffffff;
@@ -81,8 +79,7 @@
         }
 
         .bright-sharp {
-            filter: brightness(1.08) contrast(1.05) saturate(1.1);
-            image-rendering: -webkit-optimize-contrast;
+            filter: brightness(1.05) contrast(1.03);
         }
 
         @media print {
@@ -95,7 +92,7 @@
 <body class="p-4 md:p-8">
 
     <!-- LINE 3D 浮標 -->
-    <a href="https://line.me/ti/p/vQcf6cONnl" target="_blank" class="no-print fixed bottom-8 right-8 z-50 flex items-center justify-center w-16 h-16 bg-[#06C755] rounded-full float-3d border-2 border-white">
+    <a href="https://line.me/ti/p/vQcf6cONnl" target="_blank" class="no-print fixed bottom-8 right-8 z-50 flex items-center justify-center w-16 h-16 bg-[#06C755] rounded-full float-3d border-2 border-white shadow-xl">
         <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
             <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.185 1.039.646 1.281-.54 6.911-4.069 9.428-6.967 1.939-2.13 2.571-3.953 2.571-5.991z"/>
         </svg>
@@ -104,7 +101,7 @@
     <!-- Honor Roll Marquee -->
     <div class="no-print w-full bg-red-700 text-white py-2.5 mb-8 overflow-hidden relative shadow-inner">
         <div class="animate-scroll font-bold text-sm uppercase tracking-wider">
-            🏆 狂賀！Peggy 榮獲國中教育會考【全國榜首】錄取北一女！ 🔥 賀 曙光 昱皓 數學100！ 🌟 義民茗哲 數學滿分100！  ✨ 金名德晉 專業引領 · 卓越成績！
+            🏆 狂賀！Peggy 榮獲國中教育會考【全國榜首】錄取北一女！ 🔥 賀 曙光 昱皓 數學100！ 🌟 義民茗哲 數學滿分100！ ✨ 金名德晉 專業引領 · 卓越成績！
         </div>
     </div>
 
@@ -131,26 +128,23 @@
             </button>
         </div>
 
-        <!-- 1. Schedule Section (Moved to top) -->
+        <!-- 1. Schedule Section -->
         <div class="mb-12">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
                 <div>
                     <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
                         <span class="w-2 h-8 bg-red-700 rounded-full"></span>
-                        課程時段表
+                        學期常態課程時段表
                     </h2>
-                    <p class="text-red-600 font-bold text-sm mt-1 ml-5">📅 最新先修 (分畢業前後) & 正式課程 7/1 以後</p>
-                </div>
-                <div class="bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl text-slate-500 text-[11px] font-bold shadow-sm">
-                    💡 備註：三間分校統一於每年的 7/1 更換課表時間並升年級
+                    <p class="text-red-600 font-bold text-sm mt-1 ml-5">📅 國中各年級正式常態課表</p>
                 </div>
             </div>
 
+            <!-- Grade Tabs -->
             <div class="no-print flex flex-wrap gap-2 bg-slate-200/50 p-1.5 rounded-2xl mb-6 w-fit border border-slate-200">
-                <button onclick="switchGrade('prep')" id="tab-prep" class="tab-active px-6 py-3 rounded-xl transition shadow-sm">國一先修班</button>
-                <button onclick="switchGrade(7)" id="tab-7" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國一課程 <span class="text-[10px] opacity-70">(7/1起)</span></button>
-                <button onclick="switchGrade(8)" id="tab-8" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國二課程</button>
-                <button onclick="switchGrade(9)" id="tab-9" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition">國三課程</button>
+                <button onclick="switchGrade(7)" id="tab-7" class="tab-active px-6 py-3 rounded-xl transition shadow-sm font-bold">國一課程</button>
+                <button onclick="switchGrade(8)" id="tab-8" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition font-bold">國二課程</button>
+                <button onclick="switchGrade(9)" id="tab-9" class="px-6 py-3 rounded-xl text-slate-500 hover:text-red-700 transition font-bold">國三課程</button>
             </div>
 
             <div id="schedule-container" class="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-200">
@@ -173,57 +167,72 @@
             </div>
         </div>
 
-        <!-- 3. Peggy Testimonial Section -->
+        <!-- 3. Peggy Testimonial Section (優化圖檔比例與文字排版，方便清晰閱覽) -->
         <div class="mb-12 no-print bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-red-50">
-            <div class="grid md:grid-cols-12 items-stretch">
-                <!-- Image Side -->
-                <div class="md:col-span-5 relative min-h-[400px] bg-slate-900 flex items-center justify-center overflow-hidden">
+            <div class="grid lg:grid-cols-12 items-stretch">
+                <!-- Image Side: 保持圖片清晰完整、不裁切重要文字 -->
+                <div class="lg:col-span-5 relative bg-[#fff4ec] flex items-center justify-center p-4 md:p-6 border-b lg:border-b-0 lg:border-r border-red-100">
                     <img src="https://i.postimg.cc/v84JdYGZ/ying-mu-xie-qu-hua-mian-2026-04-23-110834.png" 
-                         alt="全國榜首 Peggy 與主任" class="w-full h-full object-cover bright-sharp">
+                         alt="全國榜首 Peggy 與主任" class="w-full h-auto max-h-[520px] object-contain rounded-2xl shadow-sm bright-sharp">
                 </div>
-                <!-- Content Side -->
-                <div class="md:col-span-7 p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-red-50/30">
-                    <div class="mb-8">
-                        <h3 class="text-3xl font-black text-slate-800 mb-4 leading-tight">
+                <!-- Content Side: 結構清晰、層次分明易讀 -->
+                <div class="lg:col-span-7 p-6 md:p-10 lg:p-12 flex flex-col justify-between bg-gradient-to-br from-white via-white to-orange-50/40">
+                    <div>
+                        <div class="inline-block bg-red-100 text-red-700 px-3.5 py-1 rounded-full text-xs font-black tracking-wider uppercase mb-3">
+                            🏆 榮譽見證 · 會考榜首
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-black text-slate-800 mb-4 leading-snug">
                             【美少女 Peggy 的奇蹟之路】
                         </h3>
-                        <div class="flex flex-wrap items-center gap-2 text-sm font-black mb-6">
-                            <span class="px-3 py-1 bg-slate-200 text-slate-600 rounded-lg line-through">不及格</span>
-                            <span class="text-red-400">➔</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-lg">全班第一</span>
-                            <span class="text-red-400">➔</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-lg">全校第一</span>
-                            <span class="text-red-400">➔</span>
-                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-lg">全縣第一</span>
-                            <span class="text-red-400">➔</span>
-                            <span class="px-5 py-1 bg-yellow-400 text-red-900 rounded-lg shadow-sm">全國榜首 🏆</span>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-6 text-slate-600 text-lg leading-relaxed">
-                        <div class="bg-white p-6 rounded-2xl border-l-8 border-yellow-400 shadow-md">
-                            <p class="italic text-slate-800 font-bold mb-2 text-xl">
-                                「妳如果考到90分，我就去領養一隻貓給妳玩！」
-                            </p>
-                            <p class="text-sm text-slate-500">— 當時，總班主任為了激勵 Peggy 認真讀書而許下的約定</p>
+                        
+                        <!-- 逆轉進步路徑 -->
+                        <div class="flex flex-wrap items-center gap-2 text-xs md:text-sm font-bold mb-6">
+                            <span class="px-2.5 py-1 bg-slate-200 text-slate-500 rounded-lg line-through">不及格</span>
+                            <span class="text-red-400 font-black">➔</span>
+                            <span class="px-2.5 py-1 bg-blue-100 text-blue-700 rounded-lg">全班第一</span>
+                            <span class="text-red-400 font-black">➔</span>
+                            <span class="px-2.5 py-1 bg-purple-100 text-purple-700 rounded-lg">全校第一</span>
+                            <span class="text-red-400 font-black">➔</span>
+                            <span class="px-2.5 py-1 bg-red-100 text-red-700 rounded-lg">全縣第一</span>
+                            <span class="text-red-400 font-black">➔</span>
+                            <span class="px-3.5 py-1 bg-amber-400 text-slate-900 rounded-lg shadow font-black">全國榜首 🏆</span>
                         </div>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                <h5 class="font-black text-red-700 text-base mb-1">💡 奇蹟關鍵</h5>
-                                <p class="text-sm font-medium">方法對、有人陪、環境給力。每個孩子都有從平凡走向非凡的潛力。</p>
+                        <div class="space-y-4 text-slate-600 text-base leading-relaxed">
+                            <div class="bg-amber-50/80 p-5 rounded-2xl border-l-4 border-amber-500 shadow-sm">
+                                <p class="italic text-slate-800 font-bold text-lg md:text-xl leading-snug">
+                                    「妳如果考到90分，我就去領養一隻貓給妳玩！」
+                                </p>
+                                <p class="text-xs md:text-sm text-slate-500 mt-2 font-medium">— 當時，總班主任為了激勵 Peggy 認真讀書而許下的約定</p>
                             </div>
-                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                <h5 class="font-black text-slate-800 text-base mb-1">🏅 我們的實力</h5>
-                                <ul class="text-xs space-y-1 font-bold text-slate-500">
-                                    <li>✨ 教學計劃全國冠軍</li>
-                                    <li>✨ 補教最高榮譽「師鐸獎」</li>
-                                    <li>✨ 全國大專優秀青年教師領軍</li>
-                                </ul>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+                                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                                    <div class="font-black text-red-700 text-sm mb-1.5 flex items-center gap-1.5">
+                                        <span>💡</span> 奇蹟關鍵
+                                    </div>
+                                    <p class="text-xs md:text-sm text-slate-600 font-medium leading-relaxed">
+                                        方法對、有人陪、環境給力。每個孩子都有從平凡走向非凡的潛力。
+                                    </p>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                                    <div class="font-black text-slate-800 text-sm mb-1.5 flex items-center gap-1.5">
+                                        <span>🏅</span> 我們的實力
+                                    </div>
+                                    <ul class="text-xs text-slate-600 space-y-1 font-bold">
+                                        <li>✨ 教學計劃全國冠軍</li>
+                                        <li>✨ 補教最高榮譽「師鐸獎」</li>
+                                        <li>✨ 全國大專優秀青年教師領軍</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <p class="font-medium text-slate-700">家長多次感謝我們：<span class="text-red-700 font-black border-b-2 border-red-200">「主任的話不是說說而已，是用行動陪著孩子成長！」</span></p>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <p class="text-sm md:text-base font-medium text-slate-700">
+                            家長多次感謝我們：<span class="text-red-700 font-black">「主任的話不是說說而已，是用行動陪著孩子成長！」</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -259,7 +268,7 @@
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738s-12 4.369-12 9.738c0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.027c-.052.303-.242 1.186 1.046.647 1.287-.54 6.942-4.085 9.467-6.991 1.761-1.954 2.526-3.834 2.526-5.973z"/></svg>
                         <span id="btnText">提交並開啟 LINE 諮詢</span>
                     </button>
-                    <p class="text-[10px] text-center text-slate-400 italic">※ 提交後會自動複製資料，方便您在 LINE 直接貼上諮詢先修或正式課程</p>
+                    <p class="text-[10px] text-center text-slate-400 italic">※ 提交後會自動複製資料，方便您在 LINE 直接貼上諮詢課程</p>
                 </form>
             </div>
         </div>
@@ -310,98 +319,108 @@
     </div>
 
     <script>
-        // 課表資料宣告
+        // 課表資料結構（格式化排版，確保文字與時間對齊整齊）
         const scheduleData = {
-            'prep': {
-                days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
-                slots: [
-                    { time: "14:00 - 15:30", items: [
-                        null, 
-                        {sub: "國一先修英文<br><span class='text-xs'>(6/11畢業後)</span>", type: "prep"}, 
-                        null, 
-                        null, 
-                        {sub: "國一先修數學<br><span class='text-xs'>6/11 畢業後</span>", type: "prep"}, 
-                        null, null
-                    ]},
-                    { time: "16:20 - 18:20", items: [
-                        {sub: "兒美 C 班<br><span class='text-xs'>(畢業前後)</span>", type: "english"}, 
-                        null, null, 
-                        {sub: "兒美 C 班<br><span class='text-xs'>(畢業前後)</span>", type: "english"}, 
-                        null, null, null
-                    ]},
-                    { time: "18:00 - 21:00", items: [
-                        null, null, null, null, null,
-                        {sub: "總班主任個別指導班", type: "principal"}, 
-                        null
-                    ]},
-                    { time: "18:30 - 20:00", items: [
-                        null, null, 
-                        {sub: "國一先修數學<br><span class='text-xs'>(5/13~6/3畢業前)</span>", type: "prep"}, 
-                        null, null, null, null
-                    ]}
-                ]
-            },
             7: {
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
-                    { time: "18:30 - 21:00", items: [
-                        {sub: "國一數學", type: "math"}, 
-                        {sub: "國一英文", type: "english"}, 
-                        null, 
-                        null, null, null, null
-                    ]},
-                    { time: "18:00 - 21:00", items: [
-                        null, null, null, null, null,
-                        {sub: "總班主任個別指導 (全科)", type: "principal"}, 
-                        null
-                    ]}
+                    { 
+                        timeTitle: "下午時段",
+                        timeRange: "14:00 - 17:30", 
+                        items: [
+                            null, null, null, null, null,
+                            {
+                                title: "總班主任",
+                                tag: "個別指導 (全科)",
+                                time: "14:00 - 21:00",
+                                note: "(跨下午至晚間)",
+                                type: "principal",
+                                rowspan: 2
+                            }, 
+                            null
+                        ]
+                    },
+                    { 
+                        timeTitle: "晚上時段",
+                        timeRange: "18:30 - 21:00", 
+                        items: [
+                            { title: "國一數學", tag: "常態班", time: "18:30 - 21:00", type: "math" }, 
+                            { title: "國一英文", tag: "常態班", time: "18:30 - 21:00", type: "english" }, 
+                            null, 
+                            null, 
+                            null, 
+                            { skip: true }, 
+                            null
+                        ]
+                    }
                 ]
             },
             8: {
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
-                    // 國二英文配合需求，由原本的週一 18:30-21:00 (如 image_75a634.png 所示)，更換為週三 18:30-20:30。
-                    { time: "18:30 - 20:30", items: [
-                        null, 
-                        null, 
-                        {sub: "國二英文 (個別指導)", type: "english"}, // 更新：移至週三且調整為 18:30-20:30
-                        null, 
-                        null, 
-                        null, 
-                        null
-                    ]},
-                    { time: "18:30 - 21:00", items: [
-                        null, 
-                        null, 
-                        null, 
-                        null,
-                        {sub: "國二數學 (個別指導)", type: "math"}, // 國二數學維持在週五
-                        null, 
-                        null
-                    ]},
-                    { time: "18:00 - 21:00", items: [
-                        null, null, null, null, null,
-                        {sub: "總班主任個別指導 (全科)", type: "principal"}, 
-                        null
-                    ]}
+                    { 
+                        timeTitle: "下午時段",
+                        timeRange: "14:00 - 17:30", 
+                        items: [
+                            null, null, null, null, null,
+                            {
+                                title: "總班主任",
+                                tag: "個別指導 (全科)",
+                                time: "14:00 - 21:00",
+                                note: "(跨下午至晚間)",
+                                type: "principal",
+                                rowspan: 2
+                            }, 
+                            null
+                        ]
+                    },
+                    { 
+                        timeTitle: "晚上時段",
+                        timeRange: "18:30 - 21:00", 
+                        items: [
+                            null, 
+                            null, 
+                            { title: "國二英文", tag: "個別指導", time: "18:30 - 20:30", type: "english" }, 
+                            null, 
+                            { title: "國二數學", tag: "個別指導", time: "18:30 - 21:00", type: "math" }, 
+                            { skip: true }, 
+                            null
+                        ]
+                    }
                 ]
             },
             9: {
                 days: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
                 slots: [
-                    { time: "13:30 - 16:30", items: [
-                        null, null, null, null, null, null,
-                        {sub: "國三自然", type: "science"}
-                    ]},
-                    { time: "18:00 - 21:00", items: [
-                        {sub: "國三英文", type: "english"}, 
-                        null, 
-                        {sub: "國三社會", type: "social"}, 
-                        {sub: "國三數學", type: "math"}, 
-                        {sub: "國三國文", type: "chinese"}, 
-                        {sub: "總班主任個別指導 (全科)", type: "principal"}, 
-                        null
-                    ]}
+                    { 
+                        timeTitle: "下午時段",
+                        timeRange: "13:30 - 16:30", 
+                        items: [
+                            null, null, null, null, null,
+                            {
+                                title: "總班主任",
+                                tag: "個別指導 (全科)",
+                                time: "14:00 - 21:00",
+                                note: "(跨下午至晚間)",
+                                type: "principal",
+                                rowspan: 2
+                            },
+                            { title: "國三自然", tag: "常態班", time: "13:30 - 16:30", type: "science" }
+                        ]
+                    },
+                    { 
+                        timeTitle: "晚上時段",
+                        timeRange: "18:00 - 21:00", 
+                        items: [
+                            { title: "國三英文", tag: "常態班", time: "18:00 - 21:00", type: "english" }, 
+                            null, 
+                            null, // 已刪除國三社會
+                            { title: "國三數學", tag: "常態班", time: "18:00 - 21:00", type: "math" }, 
+                            null, // 已刪除國三國文
+                            { skip: true }, 
+                            null
+                        ]
+                    }
                 ]
             }
         };
@@ -411,44 +430,75 @@
                 btn.classList.remove('tab-active');
                 btn.classList.add('text-slate-500');
             });
-            document.getElementById(`tab-${grade}`).classList.add('tab-active');
+            const activeTab = document.getElementById(`tab-${grade}`);
+            if (activeTab) {
+                activeTab.classList.add('tab-active');
+                activeTab.classList.remove('text-slate-500');
+            }
             renderSchedule(grade);
         }
 
         function renderSchedule(grade) {
             const data = scheduleData[grade];
             const container = document.getElementById('schedule-container');
+            if (!data || !container) return;
             
             let html = `
                 <div class="overflow-x-auto">
-                    <table class="w-full text-center border-collapse min-w-[800px]">
+                    <table class="w-full text-center border-collapse table-fixed min-w-[860px]">
                         <thead>
                             <tr class="bg-slate-900 text-white">
-                                <th class="p-5 font-bold text-sm w-32 border-r border-slate-700">授課時段</th>
-                                ${data.days.map(day => `<th class="p-5 font-bold text-sm ${day === '週日' ? 'text-red-400' : ''} ${day === '週六' ? 'text-amber-400' : ''}">${day}</th>`).join('')}
+                                <th class="py-4 px-2 font-bold text-sm w-[15%] border-r border-slate-800">授課時段</th>
+                                ${data.days.map((day, idx) => {
+                                    const colorClass = day === '週日' ? 'text-red-400' : (day === '週六' ? 'text-amber-400' : 'text-slate-100');
+                                    return `<th class="py-4 px-1 font-bold text-sm w-[12.14%] border-r border-slate-800 last:border-r-0 ${colorClass}">${day}</th>`;
+                                }).join('')}
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100">
+                        <tbody class="divide-y divide-slate-100 bg-white">
             `;
 
             data.slots.forEach((slot) => {
                 html += `
-                    <tr>
-                        <td class="p-5 bg-slate-50 border-r border-slate-100 font-bold text-slate-600 text-sm">
-                            ${slot.time}
+                    <tr class="h-44">
+                        <td class="p-3 bg-slate-50/80 border-r border-slate-100 font-bold text-slate-700 align-middle">
+                            <div class="text-sm font-black text-slate-800 mb-1">${slot.timeTitle}</div>
+                            <div class="text-xs font-medium text-slate-500 bg-white/80 py-1 px-2 rounded-md border border-slate-200/60 inline-block">${slot.timeRange}</div>
                         </td>
-                        ${slot.items.map(item => {
-                            if (!item) return `<td class="p-4 empty-slot">備課 / 輔導</td>`;
-                            return `
-                                <td class="p-3">
-                                    <div class="subject-${item.type} py-4 px-2 rounded-xl font-bold text-base shadow-sm transform transition hover:scale-105 cursor-default">
-                                        ${item.sub}
-                                    </div>
-                                </td>
-                            `;
-                        }).join('')}
-                    </tr>
                 `;
+
+                slot.items.forEach(item => {
+                    if (item && item.skip) {
+                        return; // 被上一列 rowspan 跨行覆蓋
+                    }
+                    if (!item) {
+                        html += `
+                            <td class="p-2 border-r border-slate-100 last:border-r-0 align-middle">
+                                <div class="empty-slot flex flex-col items-center justify-center h-full py-4 text-slate-400">
+                                    <span>備課 / 輔導</span>
+                                </div>
+                            </td>
+                        `;
+                    } else {
+                        const rowspanAttr = item.rowspan ? `rowspan="${item.rowspan}"` : '';
+                        const isSpan = item.rowspan && item.rowspan > 1;
+                        
+                        html += `
+                            <td ${rowspanAttr} class="p-2.5 border-r border-slate-100 last:border-r-0 align-middle ${isSpan ? 'bg-amber-50/20' : ''}">
+                                <div class="subject-${item.type} h-full min-h-[140px] p-3 rounded-2xl font-bold shadow-sm transition-all duration-200 hover:shadow-md flex flex-col justify-center items-center text-center">
+                                    <div class="text-base font-black tracking-tight mb-1">${item.title}</div>
+                                    ${item.tag ? `<div class="text-xs font-extrabold opacity-90 mb-2 px-2 py-0.5 rounded-full bg-white/60 inline-block">${item.tag}</div>` : ''}
+                                    <div class="text-[11px] font-semibold tracking-tight opacity-90 bg-white/70 px-2 py-1 rounded-md border border-black/5 inline-block">
+                                        ${item.time}
+                                    </div>
+                                    ${item.note ? `<div class="text-[10px] mt-1 text-amber-800/80 font-bold">${item.note}</div>` : ''}
+                                </div>
+                            </td>
+                        `;
+                    }
+                });
+
+                html += `</tr>`;
             });
 
             html += `</tbody></table></div>`;
@@ -471,7 +521,7 @@
             submitBtn.disabled = true;
             btnText.innerText = "正在複製資料並跳轉...";
             
-            const textToCopy = `【金名德晉預約報名諮詢】\n學生姓名：${sName}\n家長姓名：${pName}\n行動電話：${phone}\n---\n我已完成網頁表單提交，想了解國一先修或 7/1 正式課程詳情！`;
+            const textToCopy = `【金名德晉預約報名諮詢】\n學生姓名：${sName}\n家長姓名：${pName}\n行動電話：${phone}\n---\n我已完成網頁表單提交，想了解國中課程詳情！`;
 
             try {
                 const tempTextArea = document.createElement('textarea');
@@ -498,8 +548,8 @@
             }
         });
 
-        // 預設載入 國二課程，以便直接向使用者展示修改後的效果
-        window.onload = () => switchGrade(8);
+        // 預設載入 國一課程
+        window.onload = () => switchGrade(7);
     </script>
 </body>
 </html>
